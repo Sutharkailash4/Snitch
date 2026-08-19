@@ -1,16 +1,11 @@
-function removeDuplicates(arr) {
-    let previous = arr[0];
-    for(let i=1; i<arr.length; i++) {
+import { configDotenv } from "dotenv";
+configDotenv();
 
-    }
-}
+import app from "./src/app.js";
+import ConnectToDatabase from "./src/config/database.js";
 
-console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+const port = 3000 || process.env.PORT;
 
-let a = 10;
-let b = 20;
-let c = 30;
-
-console.log(a);
-console.log(b);
-console.log(c);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
+});
