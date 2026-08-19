@@ -1,7 +1,7 @@
 import { configDotenv } from "dotenv";
 configDotenv();
 
-if(!port) {
+if(!process.env.PORT) {
     throw new Error("Port is not defined in environemt variable");
 }
 
