@@ -16,10 +16,12 @@ const authRegisterController = async (req, res) => {
             })
         }
 
+        const hash_password = await bcrypt.hash(password, 10);
+
         const user = await userModel.create({
             fullName : fullName,
             email : email,
-            password :  password,
+            password :  hash_password,
             mobileNumber : mobileNumber,
             role : role
         });
@@ -58,7 +60,12 @@ const authRegisterController = async (req, res) => {
         sameSite : "strict"
     });
 
-    
+    res.status(201).json({
+        message : "User Created Successfully",
+        fullname : user.fullName,
+        id : user._id,
+        email : user.email
+    });
 
     } catch (error) {
         res.status(400).json({
