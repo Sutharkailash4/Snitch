@@ -84,8 +84,12 @@ const authLoginController = async (req, res) => {
         });
 
         if(!isUserExists) {
-            
+            return res.status(404).json({
+                message : "User does not exists"
+            });
         }
+
+        
 
     } catch (error) {
         res.status(400).json({
