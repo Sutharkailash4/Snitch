@@ -77,7 +77,7 @@ const authRegisterController = async (req, res) => {
 
 const authLoginController = async (req, res) => {
     try {
-
+        const {email, password} = req.body;
     } catch (error) {
         res.status(400).json({
             message : "Something Went Wrong",
