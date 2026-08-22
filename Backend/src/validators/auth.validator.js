@@ -1,5 +1,18 @@
 import {body, validationResult} from "express-validator";
 
+const validateRequests = (req, res, next) => {
+    
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({
+            error: errors.array()
+        });
+    }
+
+    next();
+    
+};
+
 const validateRegister = [
     body("fullName")
     .trim()
@@ -30,14 +43,29 @@ const validateRegister = [
     .isMobilePhone("en-IN")
     .withMessage("Enter a valid Indian mobile number"),
 
-    
+    validateRequests
 ];
 
 const validateLogin = [
-    
+    body("email")
+    .trim()
+    .isEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please provide a valid email")
+    .normalizeEmail(),
+
+    body("password")
+    .trim()
+    .isEmpty()
+    .withMessage("Password is required")
+    .isLength({min: 8, max: 128})
+    .withMessage("Password must be beetwen 8 to 128 characters"),
+
+    validateRequests  
 ];
 
 export {
     validateRegister,
     validateLogin
-}
+}                                                                                                           
