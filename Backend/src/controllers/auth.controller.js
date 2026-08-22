@@ -78,6 +78,15 @@ const authRegisterController = async (req, res) => {
 const authLoginController = async (req, res) => {
     try {
         const {email, password} = req.body;
+
+        const isUserExists = await userModel.findOne({
+            email  : email
+        });
+
+        if(!isUserExists) {
+            
+        }
+
     } catch (error) {
         res.status(400).json({
             message : "Something Went Wrong",
