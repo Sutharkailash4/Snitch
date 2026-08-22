@@ -64,3 +64,8 @@ const validateLogin = [
 
     validateRequests
 ];
+
+export {
+    validateRegister,
+    validateLogin
+}

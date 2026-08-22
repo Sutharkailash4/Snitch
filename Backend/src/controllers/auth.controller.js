@@ -6,7 +6,7 @@ const authRegisterController = async (req, res) => {
     try {
         const {fullName, email, password, mobileNumber, role} = req.body;
 
-        const isUserAlreadyExists = await userModel.find({
+        const isUserAlreadyExists = await userModel.findOne({
             email : email            
         });
 
