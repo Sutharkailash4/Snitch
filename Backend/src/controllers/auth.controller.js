@@ -89,6 +89,8 @@ const authLoginController = async (req, res) => {
             });
         }
 
+        const isPasswordCorrect = await bcrypt.compare(password, isUserExists.password);
+
         
 
     } catch (error) {
