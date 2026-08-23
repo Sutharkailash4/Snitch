@@ -120,7 +120,24 @@ const authLoginController = async (req, res) => {
     }
 )   
 
+    res.cookie("access_token", accessToken, {
+        httpOnly : true,
+        secure : true,
+        sameSite : "strict"
+    }); 
 
+    res.cookie("refresh_token", refreshToken, {
+        httpOnly : true,
+        secure : true,
+        sameSite : "strict"
+    });
+
+    res.status(200).json({
+        message : "User Logged In Successfully",
+        fullname : isUserExists.fullName,
+        id : isUserExists._id,
+        email : isUserExists.email
+    });
 
     } catch (error) {
         res.status(400).json({
