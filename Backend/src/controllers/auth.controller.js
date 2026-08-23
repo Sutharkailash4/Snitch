@@ -91,7 +91,36 @@ const authLoginController = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, isUserExists.password);
 
-        
+        if(!isPasswordCorrect) {
+            return res.status(404).json({
+                message : "Invalid Credentials"
+            });
+        }
+
+        const accessToken = jwt.sign({
+            Fullname : isUserExists.fullName,
+            id : isUserExists._id,
+            email : isUserExists.email
+        },
+        process.env.JWT_ACCESS_TOKEN,
+        {
+            expiresIn : "3h"
+        }
+    )
+
+    const refreshToken = jwt.sign({
+        Fullname : isUserExists.fullName,
+
+            id : isUserExists._id,
+            email : isUserExists.email
+    },
+    process.env.JWT_REFRESH_TOKEN,
+    {
+        expiresIn : "7d"
+    }
+)   
+
+
 
     } catch (error) {
         res.status(400).json({
