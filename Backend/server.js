@@ -6,6 +6,8 @@ import ConnectToDatabase from "./src/config/database.js";
 
 const port = 3000 || process.env.PORT;
 
+// Connect To Datbase and Start Server
+
 const serverStart = async () => {
     try {
 
