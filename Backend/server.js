@@ -1,3 +1,5 @@
+// Load Dotenv
+
 import { configDotenv } from "dotenv";
 configDotenv();
 
